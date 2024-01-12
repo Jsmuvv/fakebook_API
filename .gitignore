@@ -1,1 +1,7 @@
 .arizona/
+
+
+__pycache__/
+
+.env
+.vscode/
