@@ -60,17 +60,6 @@ def create_user():
     new_user = User(first_name=first_name,last_name=last_name,username=username,email=email,password=password)
     return new_user.to_dict(),201
     
-    #  Create a new user dict and append to users list
-    # new_user = {
-    #     "id": len(users) + 1,
-    #     "firstName": first_name,
-    #     "lastName": last_name,
-    #     "username": username,
-    #     "email": email,
-    #     "password":password
-    # }
-    # users.append(new_user)
-    # return new_user,201
 
 
 # POST ENDPOINTS
@@ -171,4 +160,10 @@ def get_user(user_id):
         return user.to_dict
     else:
         return {"error": f"user with id: {user_id} not found"},404
+    
+@app.route('/users/me')
+@token_auth.login_required
+def get_me():
+    current_user = token_auth.current_user()
+    return current_user.to_dict()
 
